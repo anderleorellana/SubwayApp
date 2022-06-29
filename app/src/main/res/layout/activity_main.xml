@@ -131,6 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="4dp"
+                android:onClick="onClick"
                 android:text="crea una aqui."
                 android:textColor="@color/green" />
         </LinearLayout>
