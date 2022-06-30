@@ -82,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(View v) {
         // Do something in response to button click
-        Intent i = new Intent(this, CreateAccount.class);
+        //Intent i = new Intent(this, CreateAccount.class);
+        Intent i = new Intent(this, ShoppingCartActivity.class);
         System.out.println( "gaaa");
         startActivity(i);
     }
