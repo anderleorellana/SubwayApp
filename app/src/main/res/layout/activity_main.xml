@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="login"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".MainActivity">
@@ -58,8 +59,8 @@
             android:layout_marginTop="5dp"
             android:textColorHint="@color/gray"
             app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
 
+            app:boxCornerRadiusBottomStart="10dp"
             app:boxCornerRadiusTopEnd="10dp"
             app:boxCornerRadiusTopStart="10dp"
             app:boxStrokeWidth="0dp"
@@ -68,6 +69,7 @@
             app:startIconTint="@color/gray">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -87,6 +89,7 @@
             app:startIconTint="@color/gray">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -110,6 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="61dp"
             android:layout_marginTop="10dp"
+            android:onClick="login"
             android:text="LOGIN"
             android:textAllCaps="false" />
 
