@@ -1,7 +1,6 @@
 package com.subway.subwayapp;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View v) {
         // Do something in response to button click
         //Intent i = new Intent(this, CreateAccount.class);
-        Intent i = new Intent(this, ShoppingCartActivity.class);
+        Intent i = new Intent(this, MiCuentaActivity.class);
         System.out.println( "gaaa");
         startActivity(i);
     }
