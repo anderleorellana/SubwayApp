@@ -21,7 +21,10 @@
             android:name=".PruebaActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateAccount"
+            android:name=".ShoppingCartActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".CreateAccountActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
