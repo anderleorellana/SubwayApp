@@ -1,18 +1,24 @@
 package com.subway.subwayapp.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
-public class Cliente {
-    private int id;
-    private String nombre, apellido, dni, celular, correo, password;
+public class Usuario {
+    private int id_usuario;
+    private String nombre;
+    private String apellido;
+    private String dni;
+    private String celular;
+    private String correo;
+    private String password;
     private Date fecha_nacimiento;
+    private String tipo;
 
-    public int getId() {
-        return id;
+    public int getId_usuario() {
+        return id_usuario;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     public String getNombre() {
@@ -69,5 +75,28 @@ public class Cliente {
 
     public void setFecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id_usuario=" + id_usuario +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", dni='" + dni + '\'' +
+                ", celular='" + celular + '\'' +
+                ", correo='" + correo + '\'' +
+                ", password='" + password + '\'' +
+                ", fecha_nacimiento=" + fecha_nacimiento +
+                ", tipo='" + tipo + '\'' +
+                '}';
     }
 }

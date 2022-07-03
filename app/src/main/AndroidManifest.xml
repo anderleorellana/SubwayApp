@@ -4,6 +4,7 @@
     package="com.subway.subwayapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -17,14 +18,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".MiCuentaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ProfileActivity"
+            android:name=".PruebaActivity"
             android:exported="false" />
         <activity
             android:name=".ShoppingCartActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".CreateAccountActivity"
             android:exported="false" />
