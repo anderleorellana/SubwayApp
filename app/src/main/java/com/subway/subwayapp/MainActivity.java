@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void crearCuenta(View view) {
-        Intent i = new Intent(this, CreateAccountActivity.class);
+        Intent i = new Intent(this, MiCuentaActivity.class);
         startActivity(i);
     }
 }
