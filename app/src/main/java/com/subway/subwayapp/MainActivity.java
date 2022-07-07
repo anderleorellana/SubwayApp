@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                             usuario.setFecha_nacimiento(format.parse(json.getString("fecha_nacimiento")));
                             usuario.setTipo(json.getString("tipo"));
 
-                            Intent i = new Intent(MainActivity.this, PruebaActivity.class);
+                            Intent i = new Intent(MainActivity.this, NavegationActivity.class);
                             i.putExtra("UsuLog",usuario.getId_usuario());
                             startActivity(i);
                         } catch (JSONException | ParseException e) {
