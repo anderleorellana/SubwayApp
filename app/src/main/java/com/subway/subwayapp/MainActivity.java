@@ -32,21 +32,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String URL= Constantes.HOST+"cliente/login.php";
-    private RequestQueue requestQueue;
     private EditText etEmail, etPass;
-    //UsuarioIMP usuarioIMP;
+    UsuarioIMP usuarioIMP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        requestQueue = Volley.newRequestQueue(this);
+
         initUI();
     }
 
     private void initUI() {
-        //usuarioIMP = new UsuarioIMP();
+        usuarioIMP = new UsuarioIMP();
         etEmail = (EditText) findViewById(R.id.etEmail);
         etPass = (EditText) findViewById(R.id.etPasword);
     }
@@ -54,55 +52,13 @@ public class MainActivity extends AppCompatActivity {
     public void iniciarSesion(View view){
         String email = etEmail.getText().toString();
         String password = etPass.getText().toString();
-        verificarCredenciales(email,password);
-        //int id_usuario = usuarioIMP.verificarCredenciales(email,password,view);
 
-        //Intent i = new Intent(this, NavegationActivity.class);
-        //i.putExtra("UsuLog",id_usuario);
-        //startActivity(i);
+        usuarioIMP.verificarCredenciales(email,password,view);
     }
 
-    private void verificarCredenciales(final String email,final String password) {
-        StringRequest stringRequest = new StringRequest(
-                Request.Method.POST,
-                URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Usuario usuario = new Usuario();
-                        try {
-                            JSONObject json = new JSONObject(response);
-
-                            Intent i = new Intent(MainActivity.this, NavegationActivity.class);
-                            i.putExtra("UsuLog",json.getInt("id_usuario"));
-                            startActivity(i);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.i("in","no inicio sesion");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("in","no inicio sesion");
-                    }
-                }
-        ){
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("correo",email);
-                params.put("password",password);
-                return params;
-            }
-        };
-        requestQueue.add(stringRequest);
-    }
 
     public void crearCuenta(View view) {
-        Intent i = new Intent(this, MiCuentaActivity.class);
+        Intent i = new Intent(this, CreateAccountActivity.class);
         startActivity(i);
     }
 }
