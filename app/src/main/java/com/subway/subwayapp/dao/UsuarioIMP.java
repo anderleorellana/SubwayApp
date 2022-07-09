@@ -118,4 +118,60 @@ public class UsuarioIMP implements UsuarioDAO{
         };
         requestQueue.add(stringRequest);
     }
+    public void registrarCliente(View view,String nombre, String apellido, String dni, String celular, String email, String password, String fecha){
+        final String URL1= Constantes.HOST+"cliente/registro.php";
+        requestQueue = Volley.newRequestQueue(view.getContext());
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                URL1,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.i("in",response);
+                        Toast.makeText(view.getContext(),"Cliente Registrado",Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(view.getContext(), MainActivity.class);
+                        view.getContext().startActivity(i);
+
+                        /*
+                        try {
+                            JSONObject json = new JSONObject(response);
+                            /*
+                            if(json.getString("nombre")=="Registrado"){
+                                Log.i("in","Registrado");
+                            }
+                            //Log.i("in",json.getString());
+                            Toast.makeText(view.getContext(),"Registrado correctamente",Toast.LENGTH_LONG).show();
+
+                            Intent i = new Intent(view.getContext(), MainActivity.class);
+                            view.getContext().startActivity(i);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.i("in","no inicio sesion");
+                        }*/
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("in","no inicio sesion");
+                    }
+                }
+        ){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("nombre",String.valueOf(nombre));
+                params.put("apellido",String.valueOf(apellido));
+                params.put("dni",String.valueOf(dni));
+                params.put("celular",String.valueOf(celular));
+                params.put("email",String.valueOf(email));
+                params.put("password",String.valueOf(password));
+                params.put("fecha",String.valueOf(fecha));
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
 }
