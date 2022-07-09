@@ -1,68 +1,39 @@
-package com.subway.subwayapp;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+package com.subway.subwayapp.dao;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.subway.subwayapp.MainActivity;
+import com.subway.subwayapp.NavegationActivity;
 import com.subway.subwayapp.constantes.Constantes;
-import com.subway.subwayapp.dao.UsuarioIMP;
 import com.subway.subwayapp.entity.Usuario;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class UsuarioIMP implements UsuarioDAO{
     private static final String URL= Constantes.HOST+"cliente/login.php";
     private RequestQueue requestQueue;
-    private EditText etEmail, etPass;
-    //UsuarioIMP usuarioIMP;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        requestQueue = Volley.newRequestQueue(this);
-        initUI();
-    }
+    public int verificarCredenciales(String email, String password, View view) {
+        requestQueue = Volley.newRequestQueue(view.getContext());
+        Usuario usuario = new Usuario();
 
-    private void initUI() {
-        //usuarioIMP = new UsuarioIMP();
-        etEmail = (EditText) findViewById(R.id.etEmail);
-        etPass = (EditText) findViewById(R.id.etPasword);
-    }
-
-    public void iniciarSesion(View view){
-        String email = etEmail.getText().toString();
-        String password = etPass.getText().toString();
-        verificarCredenciales(email,password);
-        //int id_usuario = usuarioIMP.verificarCredenciales(email,password,view);
-
-        //Intent i = new Intent(this, NavegationActivity.class);
-        //i.putExtra("UsuLog",id_usuario);
-        //startActivity(i);
-    }
-
-    private void verificarCredenciales(final String email,final String password) {
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 URL,
@@ -72,10 +43,8 @@ public class MainActivity extends AppCompatActivity {
                         Usuario usuario = new Usuario();
                         try {
                             JSONObject json = new JSONObject(response);
+                            usuario.setId_usuario(json.getInt("id_usuario"));
 
-                            Intent i = new Intent(MainActivity.this, NavegationActivity.class);
-                            i.putExtra("UsuLog",json.getInt("id_usuario"));
-                            startActivity(i);
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.i("in","no inicio sesion");
@@ -99,10 +68,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-    }
-
-    public void crearCuenta(View view) {
-        Intent i = new Intent(this, MiCuentaActivity.class);
-        startActivity(i);
+        return usuario.getId_usuario();
     }
 }

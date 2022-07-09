@@ -21,15 +21,6 @@
             android:name=".NavegationActivity"
             android:exported="false" />
         <activity
-            android:name=".PruebaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MiCuentaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ShoppingCartActivity"
-            android:exported="false" />
-        <activity
             android:name=".CreateAccountActivity"
             android:exported="false" />
         <activity
