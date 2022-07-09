@@ -32,7 +32,7 @@
             android:textAlignment="center" />
 
         <EditText
-            android:id="@+id/Nombre"
+            android:id="@+id/txtNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -43,7 +43,7 @@
             android:drawablePadding="10dp"/>
 
         <EditText
-            android:id="@+id/Apellido"
+            android:id="@+id/txtApellido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -54,7 +54,7 @@
             android:drawablePadding="10dp"/>
 
         <EditText
-            android:id="@+id/DNI"
+            android:id="@+id/txtDni"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -65,7 +65,7 @@
             android:drawablePadding="10dp"/>
 
         <EditText
-            android:id="@+id/Celular"
+            android:id="@+id/txtCelular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -76,7 +76,7 @@
             android:drawablePadding="10dp"/>
 
         <EditText
-            android:id="@+id/Email"
+            android:id="@+id/txtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -87,44 +87,45 @@
             android:drawablePadding="10dp"/>
 
         <EditText
-            android:id="@+id/Password"
+            android:id="@+id/txtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
             android:layout_below="@+id/signuptitle"
+            android:layout_margin="10dp"
+            android:drawableLeft="@drawable/ic_baseline_lock_24"
+            android:drawablePadding="10dp"
             android:hint="Password"
-            android:layout_margin="10dp"
-            android:drawableLeft="@drawable/ic_baseline_lock_24"
-            android:drawablePadding="10dp"/>
+            android:inputType="textPersonName|textPassword" />
 
         <EditText
-            android:id="@+id/Confirma_Password"
+            android:id="@+id/txtConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
             android:layout_below="@+id/signuptitle"
+            android:layout_margin="10dp"
+            android:drawableLeft="@drawable/ic_baseline_lock_24"
+            android:drawablePadding="10dp"
             android:hint="Confirma Password"
-            android:layout_margin="10dp"
-            android:drawableLeft="@drawable/ic_baseline_lock_24"
-            android:drawablePadding="10dp"/>
+            android:inputType="textPassword" />
 
         <EditText
-            android:id="@+id/Fecha"
+            android:id="@+id/txtFecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
             android:layout_below="@+id/signuptitle"
-            android:hint="Fecha de Nacimiento"
             android:layout_margin="10dp"
             android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
-            android:drawablePadding="10dp"/>
+            android:drawablePadding="10dp"
+            android:hint="Fecha de Nacimiento"
+            android:inputType="date|datetime" />
 
         <Button
             android:id="@+id/btnCreate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="create account"
-            android:backgroundTint="@color/verde"/>
+            android:backgroundTint="@color/verde"
+            android:onClick="registrarCliente"
+            android:text="create account" />
 
         <LinearLayout
             android:layout_width="match_parent"
