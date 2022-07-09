@@ -1,8 +1,11 @@
 package com.subway.subwayapp.dao;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -15,11 +18,13 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.subway.subwayapp.MainActivity;
 import com.subway.subwayapp.NavegationActivity;
+import com.subway.subwayapp.R;
 import com.subway.subwayapp.constantes.Constantes;
 import com.subway.subwayapp.entity.Usuario;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,9 +35,8 @@ public class UsuarioIMP implements UsuarioDAO{
 
 
     @Override
-    public int verificarCredenciales(String email, String password, View view) {
+    public void verificarCredenciales(String email, String password, View view) {
         requestQueue = Volley.newRequestQueue(view.getContext());
-        Usuario usuario = new Usuario();
 
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
@@ -45,9 +49,14 @@ public class UsuarioIMP implements UsuarioDAO{
                             JSONObject json = new JSONObject(response);
                             usuario.setId_usuario(json.getInt("id_usuario"));
 
+                            Intent i = new Intent(view.getContext(), NavegationActivity.class);
+                            i.putExtra("UsuLog",usuario.getId_usuario());
+                            view.getContext().startActivity(i);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Log.i("in","no inicio sesion");
+                            Toast.makeText(view.getContext(),"Credenciales invalidas",Toast.LENGTH_LONG).show();
                         }
                     }
                 },
@@ -68,6 +77,45 @@ public class UsuarioIMP implements UsuarioDAO{
             }
         };
         requestQueue.add(stringRequest);
-        return usuario.getId_usuario();
+    }
+
+    public void obtenerNombre(final int codigo, View view) {
+        final String URL1= Constantes.HOST+"cliente/datos.php";
+        requestQueue = Volley.newRequestQueue(view.getContext());
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                URL1,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Usuario usuario = new Usuario();
+                        try {
+                            JSONObject json = new JSONObject(response);
+                            TextView tv = (TextView) view.findViewById(R.id.textUsername);
+                            tv.setText(json.getString("nombre") + "!");
+                            //textView.setText(json.getString("nombre"));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.i("in","no inicio sesion");
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.i("in","no inicio sesion");
+                    }
+                }
+        ){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                params.put("codigo",String.valueOf(codigo));
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 }

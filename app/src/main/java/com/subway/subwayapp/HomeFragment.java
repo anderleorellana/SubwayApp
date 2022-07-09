@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.subway.subwayapp.constantes.Constantes;
+import com.subway.subwayapp.dao.UsuarioIMP;
 import com.subway.subwayapp.entity.Usuario;
 
 import org.json.JSONException;
@@ -33,8 +34,7 @@ public class HomeFragment extends Fragment {
     private View homeView;
     private int ID_U;
     private TextView tUsername;
-    private static final String URL= Constantes.HOST+"cliente/datos.php";
-    private RequestQueue requestQueue;
+    UsuarioIMP usuarioIMP;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -46,56 +46,19 @@ public class HomeFragment extends Fragment {
         if (getArguments() != null) {
             ID_U = getArguments().getInt("ID_USU",0);
         }
-        requestQueue = Volley.newRequestQueue(getContext());
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        usuarioIMP = new UsuarioIMP();
         homeView = inflater.inflate(R.layout.fragment_home, container, false);
         tUsername = (TextView) homeView.findViewById(R.id.textUsername);
+        usuarioIMP.obtenerNombre(ID_U, homeView);
 
-        obtenerNombre(ID_U);
         // Inflate the layout for this fragment
         return homeView;
 
     }
 
-    private void obtenerNombre(final int codigo) {
-        StringRequest stringRequest = new StringRequest(
-                Request.Method.POST,
-                URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Usuario usuario = new Usuario();
-                        try {
-                            JSONObject json = new JSONObject(response);
-
-                            tUsername.setText(json.getString("nombre"));
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Log.i("in","no inicio sesion");
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i("in","no inicio sesion");
-                    }
-                }
-        ){
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("codigo",String.valueOf(codigo));
-                return params;
-            }
-        };
-        requestQueue.add(stringRequest);
-    }
 }
